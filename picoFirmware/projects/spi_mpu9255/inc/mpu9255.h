@@ -1,0 +1,425 @@
+/*
+ * mpu9255.h
+ *
+ *  Created on: Sep 1, 2016
+ *      Author: sfmaudet
+ */
+
+#ifndef MPU9255_H_
+#define MPU9255_H_
+
+#define I2C_ADDR_MAG 	    0x0C
+
+#define SPI_WRITE		0x00
+#define SPI_READ		0x80
+
+
+#define GYRO_250_LSB	131
+#define GYRO_500_LSB	65.5
+#define GYRO_1000_LSB	32.8
+#define GYRO_2000_LSB	16.4
+
+
+
+#define ACCEL_2g_LSB	16384
+#define ACCEL_4g_LSB	8192
+#define ACCEL_8g_LSB	4096
+#define ACCEL_16g_LSB	2048
+
+
+#define MAG_LSB			0.6
+//Register for Gyroscope and Accelerometer
+
+#define MPU9255_SELF_TEST_X_GYRO       	0x00			// Registro [7:0] Selftest value X GIRO
+#define MPU9255_SELF_TEST_Y_GYRO       	0x01			// Registro [7:0] Selftest value Y GIRO
+#define MPU9255_SELF_TEST_Z_GYRO       	0x02			// Registro [7:0] Selftest value X GIRO
+#define MPU9255_SELF_TEST_X_ACCEL      	0x0D			// Registro [7:0] Selftest value X ACCEL
+#define MPU9255_SELF_TEST_Y_ACCEL      	0x0E			// Registro [7:0] Selftest value Y ACCEL
+#define MPU9255_SELF_TEST_Z_ACCEL      	0x0F			// Registro [7:0] Selftest value Z ACCEL
+
+
+#define MPU9255_XG_OFFSET_H				0x13
+#define MPU9255_XG_OFFSET_L				0x14
+#define MPU9255_YG_OFFSET_H				0x15
+#define MPU9255_YG_OFFSET_L				0x16
+#define MPU9255_ZG_OFFSET_H				0x17
+#define MPU9255_ZG_OFFSET_L				0x18
+
+
+#define MPU9255_SMPLRT_DIV				0x19
+#define MPU9255_CONFIG					0x1A
+#define MPU9255_GYRO_CONFIG				0x1B
+#define MPU9255_ACCEL_CONFIG			0x1C
+#define MPU9255_ACCEL_CONFIG_2			0x1D
+#define MPU9255_LP_ACCEL_ODR			0x1E
+#define MPU9255_WOM_THR					0x1F
+#define MPU9255_FIFO_EN					0x23
+#define MPU9255_I2C_MST_CTRL			0x24
+#define MPU9255_I2C_SLV0_ADDR			0x25
+
+#define MPU9255_I2C_SLV0_REG			0x26
+#define MPU9255_I2C_SLV0_CTRL			0x27
+#define MPU9255_I2C_SLV1_ADDR			0x28
+#define MPU9255_I2C_SLV1_REG		 	0x29
+#define MPU9255_I2C_SLV1_CTRL		 	0x2A
+#define MPU9255_I2C_SLV2_ADDR			0x2B
+#define MPU9255_I2C_SLV2_REG		 	0x2C
+#define MPU9255_I2C_SLV2_CTRL 			0x2D
+#define MPU9255_I2C_SLV3_ADDR	 		0x2E
+#define MPU9255_I2C_SLV3_REG 			0x2F
+#define MPU9255_I2C_SLV3_CTRL 			0x30
+#define MPU9255_I2C_SLV4_ADDR 			0x31
+#define MPU9255_I2C_SLV4_REG 			0x32
+#define MPU9255_I2C_SLV4_DO 			0x33
+#define MPU9255_I2C_SLV4_CTRL 			0x34
+#define MPU9255_I2C_SLV4_DI 			0x35
+
+
+#define MPU9255_I2C_MST_STATUS 			0x36
+#define MPU9255_INT_PIN_CFG 		 	0x37
+#define MPU9255_INT_ENABLE			 	0x38
+#define MPU9255_INT_STATUS 				0x3A
+#define MPU9255_ACCEL_XOUT_H 			0x3B
+#define MPU9255_ACCEL_XOUT_L 			0x3C
+#define MPU9255_ACCEL_YOUT_H 			0x3D
+#define MPU9255_ACCEL_YOUT_L			0x3E
+#define MPU9255_ACCEL_ZOUT_H 			0x3F
+#define MPU9255_ACCEL_ZOUT_L 			0x40
+#define MPU9255_TEMP_OUT_H 				0x41
+#define MPU9255_TEMP_OUT_L 				0x42
+#define MPU9255_GYRO_XOUT_H 			0x43
+#define MPU9255_GYRO_XOUT_L 			0x44
+#define MPU9255_GYRO_YOUT_H 			0x45
+#define MPU9255_GYRO_YOUT_L 			0x46
+#define MPU9255_GYRO_ZOUT_H 			0x47
+#define MPU9255_GYRO_ZOUT_L 			0x48
+
+
+#define MPU9255_I2C_MST_DELAY_CTRL		0x67
+#define MPU9255_SIGNAL_PATH_RESET 		0x68
+#define MPU9255_MOT_DETECT_CTRL 		0x69
+#define MPU9255_USER_CTRL			 	0x6A
+#define MPU9255_PWR_MGMT_1 				0x6B
+#define MPU9255_PWR_MGMT_2 				0x6C
+#define MPU9255_FIFO_COUNTH 			0x72
+#define MPU9255_FIFO_COUNTL 			0x73
+#define MPU9255_FIFO_R_W 				0x74
+#define MPU9255_WHO_AM_I			    0x75
+#define MPU9255_XA_OFFSET_H			    0x77
+#define MPU9255_XA_OFFSET_L 			0x78
+#define MPU9255_YA_OFFSET_H 			0x7A
+#define MPU9255_YA_OFFSET_L 			0x7B
+#define MPU9255_ZA_OFFSET_H 			0x7D
+#define MPU9255_ZA_OFFSET_L 			0x7E
+
+
+
+//Registers for Magnetometer
+
+#define MPU9255_MAG_WIA					0x00
+#define MPU9255_MAG_INFO				0x01
+#define MPU9255_MAG_ST1					0x02
+#define MPU9255_MAG_HXL					0x03
+#define MPU9255_MAG_HXH					0x04
+#define MPU9255_MAG_HYL					0x05
+#define MPU9255_MAG_HYH					0x06
+#define MPU9255_MAG_HZL					0x07
+#define MPU9255_MAG_HZH					0x08
+#define MPU9255_MAG_ST2					0x09
+#define MPU9255_MAG_CNTL1				0x0A
+#define MPU9255_MAG_ASTC				0x0C
+#define MPU9255_MAG_TS1					0x0D
+#define MPU9255_MAG_TS2					0x0E
+#define MPU9255_MAG_I2CDIS				0x0F
+#define MPU9255_MAG_ASAX				0x10
+#define MPU9255_MAG_ASAY				0x11
+#define MPU9255_MAG_ASAZ				0x12
+
+
+// Magnetometer Register Configurations
+
+#define MAG_CNTL1_MODE_0_BIT			0x01
+#define MAG_CNTL1_MODE_1_BIT			0x02
+#define MAG_CNTL1_MODE_2_BIT			0x04
+#define MAG_CNTL1_MODE_3_BIT			0x08
+
+#define MAG_CNTL1_14_BIT				0x00
+#define MAG_CNTL1_16_BIT				0x10
+
+//GYRO Configuration Register Bits
+
+#define MPU9255_GYRO_Cten			0xE0
+#define MPU9255_GYRO_FS_250         0x00
+#define MPU9255_GYRO_FS_500         0x08
+#define MPU9255_GYRO_FS_1000        0x10
+#define MPU9255_GYRO_FS_2000        0x18
+
+
+//ACC Configuration Register Bits
+
+#define MPU9255_ACCEL_Cten			0xE0
+#define MPU9255_ACCEL_FS_2          0x00
+#define MPU9255_ACCEL_FS_4          0x08
+#define MPU9255_ACCEL_FS_8          0x10
+#define MPU9255_ACCEL_FS_16         0x18
+
+
+#define MPU9255_TC_PWR_MODE_BIT     7
+#define MPU9255_TC_OFFSET_BIT       6
+#define MPU9255_TC_OFFSET_LENGTH    6
+#define MPU9255_TC_OTP_BNK_VLD_BIT  0
+
+#define MPU9255_VDDIO_LEVEL_VLOGIC  0
+#define MPU9255_VDDIO_LEVEL_VDD     1
+
+#define MPU9255_CFG_EXT_SYNC_SET_BIT    5
+#define MPU9255_CFG_EXT_SYNC_SET_LENGTH 3
+#define MPU9255_CFG_DLPF_CFG_BIT    2
+#define MPU9255_CFG_DLPF_CFG_LENGTH 3
+
+#define MPU9255_EXT_SYNC_DISABLED       0x0
+#define MPU9255_EXT_SYNC_TEMP_OUT_L     0x1
+#define MPU9255_EXT_SYNC_GYRO_XOUT_L    0x2
+#define MPU9255_EXT_SYNC_GYRO_YOUT_L    0x3
+#define MPU9255_EXT_SYNC_GYRO_ZOUT_L    0x4
+#define MPU9255_EXT_SYNC_ACCEL_XOUT_L   0x5
+#define MPU9255_EXT_SYNC_ACCEL_YOUT_L   0x6
+#define MPU9255_EXT_SYNC_ACCEL_ZOUT_L   0x7
+
+
+#define MPU_9255_ACC_DLPF_BW_1130		0x00
+#define MPU_9255_ACC_DLPF_BW_460		0x08
+#define MPU_9255_ACC_DLPF_BW_184		0x09
+#define MPU_9255_ACC_DLPF_BW_5			0x0E
+
+
+#define MPU9255_GCONFIG_FS_SEL_BIT      4
+#define MPU9255_GCONFIG_FS_SEL_LENGTH   2
+
+#define MPU9255_ACONFIG_XA_ST_BIT           7
+#define MPU9255_ACONFIG_YA_ST_BIT           6
+#define MPU9255_ACONFIG_ZA_ST_BIT           5
+#define MPU9255_ACONFIG_AFS_SEL_BIT         4
+#define MPU9255_ACONFIG_AFS_SEL_LENGTH      2
+#define MPU9255_ACONFIG_ACCEL_HPF_BIT       2
+#define MPU9255_ACONFIG_ACCEL_HPF_LENGTH    3
+
+#define MPU9255_DHPF_RESET          0x00
+#define MPU9255_DHPF_5              0x01
+#define MPU9255_DHPF_2P5            0x02
+#define MPU9255_DHPF_1P25           0x03
+#define MPU9255_DHPF_0P63           0x04
+#define MPU9255_DHPF_HOLD           0x07
+
+#define MPU9255_TEMP_FIFO_EN_BIT    0x80
+#define MPU9255_XG_FIFO_EN_BIT      0x40
+#define MPU9255_YG_FIFO_EN_BIT      0x20
+#define MPU9255_ZG_FIFO_EN_BIT      0x10
+#define MPU9255_ACCEL_FIFO_EN_BIT   0x08
+#define MPU9255_SLV2_FIFO_EN_BIT    0x04
+#define MPU9255_SLV1_FIFO_EN_BIT    0x02
+#define MPU9255_SLV0_FIFO_EN_BIT    0x01
+
+#define MPU9255_MULT_MST_EN_BIT     7
+#define MPU9255_WAIT_FOR_ES_BIT     6
+#define MPU9255_SLV_3_FIFO_EN_BIT   5
+#define MPU9255_I2C_MST_P_NSR_BIT   4
+#define MPU9255_I2C_MST_CLK_BIT     3
+#define MPU9255_I2C_MST_CLK_LENGTH  4
+
+#define MPU9255_CLOCK_DIV_348       0x0
+#define MPU9255_CLOCK_DIV_333       0x1
+#define MPU9255_CLOCK_DIV_320       0x2
+#define MPU9255_CLOCK_DIV_308       0x3
+#define MPU9255_CLOCK_DIV_296       0x4
+#define MPU9255_CLOCK_DIV_286       0x5
+#define MPU9255_CLOCK_DIV_276       0x6
+#define MPU9255_CLOCK_DIV_267       0x7
+#define MPU9255_CLOCK_DIV_258       0x8
+#define MPU9255_CLOCK_DIV_500       0x9
+#define MPU9255_CLOCK_DIV_471       0xA
+#define MPU9255_CLOCK_DIV_444       0xB
+#define MPU9255_CLOCK_DIV_421       0xC
+#define MPU9255_CLOCK_DIV_400       0xD
+#define MPU9255_CLOCK_DIV_381       0xE
+#define MPU9255_CLOCK_DIV_364       0xF
+
+#define MPU9255_I2C_SLV_RW_BIT      7
+#define MPU9255_I2C_SLV_ADDR_BIT    6
+#define MPU9255_I2C_SLV_ADDR_LENGTH 7
+#define MPU9255_I2C_SLV_EN_BIT      7
+#define MPU9255_I2C_SLV_BYTE_SW_BIT 6
+#define MPU9255_I2C_SLV_REG_DIS_BIT 5
+#define MPU9255_I2C_SLV_GRP_BIT     4
+#define MPU9255_I2C_SLV_LEN_BIT     3
+#define MPU9255_I2C_SLV_LEN_LENGTH  4
+
+#define MPU9255_I2C_SLV4_RW_BIT         7
+#define MPU9255_I2C_SLV4_ADDR_BIT       6
+#define MPU9255_I2C_SLV4_ADDR_LENGTH    7
+#define MPU9255_I2C_SLV4_EN_BIT         7
+#define MPU9255_I2C_SLV4_INT_EN_BIT     6
+#define MPU9255_I2C_SLV4_REG_DIS_BIT    5
+#define MPU9255_I2C_SLV4_MST_DLY_BIT    4
+#define MPU9255_I2C_SLV4_MST_DLY_LENGTH 5
+
+#define MPU9255_MST_PASS_THROUGH_BIT    7
+#define MPU9255_MST_I2C_SLV4_DONE_BIT   6
+#define MPU9255_MST_I2C_LOST_ARB_BIT    5
+#define MPU9255_MST_I2C_SLV4_NACK_BIT   4
+#define MPU9255_MST_I2C_SLV3_NACK_BIT   3
+#define MPU9255_MST_I2C_SLV2_NACK_BIT   2
+#define MPU9255_MST_I2C_SLV1_NACK_BIT   1
+#define MPU9255_MST_I2C_SLV0_NACK_BIT   0
+
+#define MPU9255_INTCFG_INT_LEVEL_BIT        7
+#define MPU9255_INTCFG_INT_OPEN_BIT         6
+#define MPU9255_INTCFG_LATCH_INT_EN_BIT     5
+#define MPU9255_INTCFG_INT_RD_CLEAR_BIT     4
+#define MPU9255_INTCFG_FSYNC_INT_LEVEL_BIT  3
+#define MPU9255_INTCFG_FSYNC_INT_EN_BIT     2
+#define MPU9255_INTCFG_I2C_BYPASS_EN_BIT    1
+#define MPU9255_INTCFG_CLKOUT_EN_BIT        0
+
+#define MPU9255_INTMODE_ACTIVEHIGH  0x00
+#define MPU9255_INTMODE_ACTIVELOW   0x01
+
+#define MPU9255_INTDRV_PUSHPULL     0x00
+#define MPU9255_INTDRV_OPENDRAIN    0x01
+
+#define MPU9255_INTLATCH_50USPULSE  0x00
+#define MPU9255_INTLATCH_WAITCLEAR  0x01
+
+#define MPU9255_INTCLEAR_STATUSREAD 0x00
+#define MPU9255_INTCLEAR_ANYREAD    0x01
+
+#define MPU9255_INTERRUPT_FF_BIT            0x80
+#define MPU9255_INTERRUPT_MOT_BIT           0x40
+#define MPU9255_INTERRUPT_ZMOT_BIT          0x20
+#define MPU9255_INTERRUPT_FIFO_OFLOW_BIT    0x10
+#define MPU9255_INTERRUPT_I2C_MST_INT_BIT   0x08
+#define MPU9255_INTERRUPT_PLL_RDY_INT_BIT   0x04
+#define MPU9255_INTERRUPT_DMP_INT_BIT       0x02
+#define MPU9255_INTERRUPT_DATA_RDY_BIT      0x00
+
+
+#define MPU9255_INTERRUPT_ACTL_BIT          0x80
+#define MPU9255_INTERRUPT_OPEN_BIT          0x40
+#define MPU9255_INTERRUPT_LATCH_BIT         0x20
+#define MPU9255_INTERRUPT_INT_ANY_BIT	    0x10
+#define MPU9255_INTERRUPT_ACTL_FSYNC_BIT    0x08
+#define MPU9255_INTERRUPT_FSYNC_INT_MODE_BIT 0x04
+#define MPU9255_INTERRUPT_BYPASS_EN_BIT     0x02
+
+
+
+
+#define MPU9255_DMPINT_5_BIT            5
+#define MPU9255_DMPINT_4_BIT            4
+#define MPU9255_DMPINT_3_BIT            3
+#define MPU9255_DMPINT_2_BIT            2
+#define MPU9255_DMPINT_1_BIT            1
+#define MPU9255_DMPINT_0_BIT            0
+
+#define MPU9255_MOTION_MOT_XNEG_BIT     7
+#define MPU9255_MOTION_MOT_XPOS_BIT     6
+#define MPU9255_MOTION_MOT_YNEG_BIT     5
+#define MPU9255_MOTION_MOT_YPOS_BIT     4
+#define MPU9255_MOTION_MOT_ZNEG_BIT     3
+#define MPU9255_MOTION_MOT_ZPOS_BIT     2
+#define MPU9255_MOTION_MOT_ZRMOT_BIT    0
+
+#define MPU9255_DELAYCTRL_DELAY_ES_SHADOW_BIT   7
+#define MPU9255_DELAYCTRL_I2C_SLV4_DLY_EN_BIT   4
+#define MPU9255_DELAYCTRL_I2C_SLV3_DLY_EN_BIT   3
+#define MPU9255_DELAYCTRL_I2C_SLV2_DLY_EN_BIT   2
+#define MPU9255_DELAYCTRL_I2C_SLV1_DLY_EN_BIT   1
+#define MPU9255_DELAYCTRL_I2C_SLV0_DLY_EN_BIT   0
+
+#define MPU9255_PATHRESET_GYRO_RESET_BIT    2
+#define MPU9255_PATHRESET_ACCEL_RESET_BIT   1
+#define MPU9255_PATHRESET_TEMP_RESET_BIT    0
+
+#define MPU9255_DETECT_ACCEL_ON_DELAY_BIT       5
+#define MPU9255_DETECT_ACCEL_ON_DELAY_LENGTH    2
+#define MPU9255_DETECT_FF_COUNT_BIT             3
+#define MPU9255_DETECT_FF_COUNT_LENGTH          2
+#define MPU9255_DETECT_MOT_COUNT_BIT            1
+#define MPU9255_DETECT_MOT_COUNT_LENGTH         2
+
+#define MPU9255_DETECT_DECREMENT_RESET  0x0
+#define MPU9255_DETECT_DECREMENT_1      0x1
+#define MPU9255_DETECT_DECREMENT_2      0x2
+#define MPU9255_DETECT_DECREMENT_4      0x3
+
+#define MPU9255_USERCTRL_DMP_EN_BIT             0x80
+#define MPU9255_USERCTRL_FIFO_EN_BIT            0x40
+#define MPU9255_USERCTRL_I2C_MST_EN_BIT         0x20
+#define MPU9255_USERCTRL_I2C_IF_DIS_BIT         0x10
+#define MPU9255_USERCTRL_DMP_RESET_BIT          0x08
+#define MPU9255_USERCTRL_FIFO_RESET_BIT         0x04
+#define MPU9255_USERCTRL_I2C_MST_RESET_BIT      0x02
+#define MPU9255_USERCTRL_SIG_COND_RESET_BIT     0x01
+
+#define MPU9255_PWR1_DEVICE_RESET_BIT   7
+#define MPU9255_PWR1_SLEEP_BIT          6
+#define MPU9255_PWR1_CYCLE_BIT          5
+#define MPU9255_PWR1_TEMP_DIS_BIT       3
+#define MPU9255_PWR1_CLKSEL_BIT         2
+#define MPU9255_PWR1_CLKSEL_LENGTH      3
+
+#define MPU9255_CLOCK_INTERNAL          0x00
+#define MPU9255_CLOCK_PLL_XGYRO         0x01
+#define MPU9255_CLOCK_PLL_YGYRO         0x02
+#define MPU9255_CLOCK_PLL_ZGYRO         0x03
+#define MPU9255_CLOCK_PLL_EXT32K        0x04
+#define MPU9255_CLOCK_PLL_EXT19M        0x05
+#define MPU9255_CLOCK_KEEP_RESET        0x07
+
+#define MPU9255_PWR2_LP_WAKE_CTRL_BIT       7
+#define MPU9255_PWR2_LP_WAKE_CTRL_LENGTH    2
+#define MPU9255_PWR2_STBY_XA_BIT            5
+#define MPU9255_PWR2_STBY_YA_BIT            4
+#define MPU9255_PWR2_STBY_ZA_BIT            3
+#define MPU9255_PWR2_STBY_XG_BIT            2
+#define MPU9255_PWR2_STBY_YG_BIT            1
+#define MPU9255_PWR2_STBY_ZG_BIT            0
+
+#define MPU9255_WAKE_FREQ_1P25      0x0
+#define MPU9255_WAKE_FREQ_2P5       0x1
+#define MPU9255_WAKE_FREQ_5         0x2
+#define MPU9255_WAKE_FREQ_10        0x3
+
+#define MPU9255_BANKSEL_PRFTCH_EN_BIT       6
+#define MPU9255_BANKSEL_CFG_USER_BANK_BIT   5
+#define MPU9255_BANKSEL_MEM_SEL_BIT         4
+#define MPU9255_BANKSEL_MEM_SEL_LENGTH      5
+
+#define MPU9255_WHO_AM_I_BIT        6
+#define MPU9255_WHO_AM_I_LENGTH     6
+
+#define MPU9255_DMP_MEMORY_BANKS        8
+#define MPU9255_DMP_MEMORY_BANK_SIZE    256
+#define MPUx_DMP_MEMORY_CHUNK_SIZE   16
+
+#define FS_DIVIDER 1
+
+
+
+void initMPU9255 (void);
+
+void readGyroData(float giro_data[]);
+void readAccelData(uint8_t * accel_data);
+void readMagnetData(float mag_data[]);
+void readMagnetCode(uint8_t * mag_data);
+
+void fifoGetCount(uint16_t * fifoCount);
+void fifoReset(void);
+uint8_t fifoReadByte(void);
+void fifoGyroAccel_disable(void);
+
+void fifoReadBurst(void);
+
+void fifoDataSplit(float * gyro_data,float * accel_data);
+
+#endif /* MPU9255_H_ */
